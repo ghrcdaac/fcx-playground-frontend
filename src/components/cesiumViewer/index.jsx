@@ -13,6 +13,7 @@ import { initializePointPrimitiveViewer } from "./PointPrimitiveViewer";
 
 import { SubsettingToolExplorer } from "../toolsExplorer/subsettingTool";
 import { HistogramToolExplorer } from "../toolsExplorer/histogramTool";
+import { TabComponent } from "../Home/tabComp";
 
 export class FCXViewer extends Component {
     constructor(props) {
@@ -21,6 +22,7 @@ export class FCXViewer extends Component {
             currentViewer: null,
             viewerExplorerToggle: true, // if true show data viewer, else show tool explorer
             toolExpolorer: "subsettingTool",
+            // fastapi: "earthaccess",
         };
         this.implementationHandler = this.implementationHandler.bind(this);
         this.setCurrentViewer = this.setCurrentViewer.bind(this);
@@ -70,6 +72,10 @@ export class FCXViewer extends Component {
                 this.setState({toolExpolorer: "histogramTool", currentViewer: null}); // reset the viewer; needed for data viewers.
                 this.flipViewMode("toolExplorer");
                 break;
+            case "earthaccess":
+                this.setState({toolExpolorer: "earthaccess", currentViewer: null});
+                this.flipViewMode("toolExplorer");
+                break;
             default:
                 this.flipViewMode("dataViewer");
                 initializeCZMLViewer(this.setCurrentViewer); 
@@ -106,6 +112,11 @@ export class FCXViewer extends Component {
                     {   !this.state.viewerExplorerToggle && this.state.toolExpolorer === "histogramTool" &&
                         (
                             <HistogramToolExplorer/>
+                        )
+                    }
+                    {   !this.state.viewerExplorerToggle && this.state.toolExpolorer === "earthaccess" &&
+                        (
+                            <TabComponent/>
                         )
                     }
                     </Grid>

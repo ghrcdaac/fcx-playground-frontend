@@ -7,7 +7,7 @@ import { FCXViewer } from '../cesiumViewer';
 import { ClippedDrawer } from './drawer';
 
 function Home() {
-  const visualizationTypes = ['czml', '3dTile', 'wmts', 'pointPrimitive', 'subsettingTool', 'histogramTool']
+  const visualizationTypes = ['czml', '3dTile', 'wmts', 'pointPrimitive', 'subsettingTool', 'histogramTool', 'earthaccess']
   const [selectedVisualization, setVisualization] = React.useState(visualizationTypes[0]);
 
   return (
