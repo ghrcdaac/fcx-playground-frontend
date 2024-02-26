@@ -3,6 +3,7 @@ import { Tab, Tabs } from "@mui/material";
 import { InputForm } from "../earthaccess/inputForm";
 import { Status } from "../earthaccess/status";
 import { GetFilePath } from "../earthaccess/filePath";
+import { ShowMetaData } from "../earthaccess/metadata";
 import { useEffect, useState } from "react";
 
 
@@ -26,7 +27,7 @@ export function TabComponent(){
     useEffect(() => {
         const socket = new WebSocket(socketUrl);
     
-        // Connection opened
+        // Connection opened, display error if conn closed
         socket.addEventListener("open", (event) => {
           console.log("Connection Open")
         })
@@ -69,9 +70,9 @@ export function TabComponent(){
             <Tab label='Metadata' />
         </Tabs>
         {currentTabIndex === 0 && <InputForm getJobid={(jobid) => setJobid(jobid)}/>}
-        {currentTabIndex === 1 && <Status jobObj={jobArrayState} clearJobs={clearJobsHandler}/>}
-        {/* {currentTabIndex === 2 && <GetFilePath jobid={jobid}/>} */}
-        {/* {currentTabIndex === 3 && <ShowMetadata jobid={jobid}/>} */}
+        {currentTabIndex === 1 && <Status tabIndex={currentTabIndex} jobObj={jobArrayState} clearJobs={clearJobsHandler}/>}
+        {currentTabIndex === 2 && <GetFilePath tabIndex={currentTabIndex} jobid={jobid}/>}
+        {currentTabIndex === 3 && <ShowMetaData tabIndex={currentTabIndex} jobid={jobid}/>}
         </React.Fragment>
     )
 }

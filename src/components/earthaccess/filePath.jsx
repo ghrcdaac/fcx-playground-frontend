@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { MyCard } from "./UI/Card/Card";
 
 export function GetFilePath(props) {
 
@@ -20,7 +21,7 @@ export function GetFilePath(props) {
             }
     
             const data = await response.json();
-            console.log(data);
+            console.log(data, typeof(data));
             setFilePath(data);
           } catch (error) {
             console.error('Error:', error.message);
@@ -34,15 +35,7 @@ export function GetFilePath(props) {
 
     return (
         <div>
-            {filePath.length > 0 ? (
-        <ul>
-          {filePath.map((path, index) => (
-            <li key={index}>{path}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>Loading...</p>
-      )}
+         <MyCard tabIndex={props.tabIndex} id={props.jobid} cardContent={filePath} />
         </div>
     )
 }
