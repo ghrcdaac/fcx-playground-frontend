@@ -27,8 +27,7 @@ export function GetFilePath(props) {
             console.error('Error:', error.message);
           }
         };
-    
-        // Call the fetchJobStatus function only when props.jobid changes
+        
         fetchJobStatus();
         console.log(filePath);
       }, [props.jobid]);

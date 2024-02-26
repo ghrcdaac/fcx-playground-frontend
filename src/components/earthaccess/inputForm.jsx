@@ -10,8 +10,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 export function InputForm(props){
 
-    
-
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString()
     }
@@ -19,13 +17,6 @@ export function InputForm(props){
     const validationSchema = Yup.object().shape({
         shortName: Yup.string().required('ShortName is required'),
         dateRange1: Yup.date()
-                    // .transform(function(value, originalValue) {
-                    //     if (this.isType(value)) {
-                    //         return value;
-                    //       }
-                    //     const result = parse(originalValue, "dd/mm/yyyy", new Date());
-                    //     return result;
-                    // })
                     .typeError("Please enter a valid start date")
                     .required(),
         dateRange2: Yup.date().typeError("Please enter a valid end date")
@@ -43,24 +34,6 @@ export function InputForm(props){
 
     const [isSubmit, setIsSubmit] = useState(true);
     const [jobid, setJobid] = useState('');
-
-
-    // const [formData, setFormData] = useState({
-    //     // shortName: 'GPM_3IMERGDF',
-    //     // dateRange1: '2019-11-19',
-    //     // dateRange2: '2023-04-06'
-    //     shortName: '',
-    //     dateRange1: '',
-    //     dateRange2: ''
-    // });
-
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormData((prevFormData) => ({
-    //         ...prevFormData,
-    //         [name]: value,
-    //     }));
-    // };
 
     const onSubmit = (formData) => {
         console.log(formData)
@@ -82,7 +55,6 @@ export function InputForm(props){
             props.getJobid(data);
         })
         .catch(error => {
-            // Handle any errors that occurred during the fetch
             console.error('Error:', error);
         });
 
@@ -98,9 +70,7 @@ export function InputForm(props){
                         id="shortName"
                         name="shortName" 
                         variant="outlined" 
-                        size='small' 
-                        // onChange={(e) => handleInputChange(e)} 
-                        // value={formData.shortName}
+                        size='small'
                         {...register("shortName")}
                         error={!!errors.shortName}
                         helperText={errors?.shortName?.message}></TextField>
@@ -111,8 +81,6 @@ export function InputForm(props){
                             name="dateRange1" 
                             variant="outlined" 
                             size='small'
-                            // onChange={handleInputChange} 
-                            // value={formData.dateRange1}
                             {...register("dateRange1")}
                             error={!!errors.dateRange1}
                             helperText={errors?.dateRange1?.message}></TextField>
@@ -122,8 +90,6 @@ export function InputForm(props){
                             name="dateRange2" 
                             variant="outlined" 
                             size='small' 
-                            // onChange={handleInputChange} 
-                            // value={formData.dateRange2}
                             {...register("dateRange2")}
                             error={!!errors.dateRange2}
                             helperText={errors?.dateRange2?.message}></TextField>

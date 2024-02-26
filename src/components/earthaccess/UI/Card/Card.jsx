@@ -1,22 +1,25 @@
 import React from "react";
-import { ArrowDropDown } from "@mui/icons-material";
 import { useState, Suspense, lazy  } from "react";
 import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
-import CardActions from "@mui/material/CardActions";
 import CardContent from '@mui/material/CardContent';
 import IconButton from "@mui/material/IconButton";
 import Collapse from "@mui/material/Collapse";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ClearAllIcon from '@mui/icons-material/ClearAll';
-import { StatusCard } from "./statusCard";
-import { FilePathCard } from "./filePathCard";
-// import { MetaDataCard } from "./metaDataCard";
-import Loading from "./loading.jsx";
+import { StatusCard } from "./statusCard.jsx";
+import { FilePathCard } from "./filePathCard.jsx";
 
-const MetaDataCard = lazy(() => import('./MetaDataCard.jsx'))
+const MetaDataCard = lazy(() => import('./metaDataCard.jsx'))
+
+/*
+    Except for inputForm, all the other tabs make use of the card component to render data. It's passed from the parents to
+    the children(<Tab name>Card) and the individual rendering is taken care there.
+*/
+
+const LazyLoading = () => {
+    return <p><i>Loading...</i></p>;
+}
 
 const ExpandMore = styled((props) => {
     const { expand, ...other } = props;
@@ -61,7 +64,7 @@ export function MyCard({ tabIndex, cardContent, id }) {
                     || (tabIndex === 2 && cardContent && <FilePathCard paths={cardContent} />)
                     || (tabIndex === 3 && cardContent && 
                     <div>
-                        <Suspense fallback={<Loading />}>
+                        <Suspense fallback={LazyLoading}>
                         <MetaDataCard metadata={cardContent}/>
                         </Suspense>
                     </div>

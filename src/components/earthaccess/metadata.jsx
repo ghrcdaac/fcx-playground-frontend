@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { MyCard } from "./UI/Card/Card";
-// import { MetaDataCard } from "./UI/Card/metaDataCard";
-
-// const MyCard = lazy(() => import("./UI/Card/Card"));
 
 export function ShowMetaData(props) {
     const [metadata, setMetadata] = useState(null);
-    const metadataRef = useRef(null);
 
     useEffect(() => {
         const fetchMetaData = async () => {
@@ -26,8 +22,7 @@ export function ShowMetaData(props) {
                 const data = await response.json();
                 console.log(data, typeof(data));
                 setMetadata(data);
-                // metadataRef.current = data;
-                console.log(metadataRef.current)
+                
             } catch (error) {
                 console.error('Error:', error.message);
             }
@@ -37,11 +32,7 @@ export function ShowMetaData(props) {
 
     return (
         <div>
-            {/* <Suspense fallback={<div>Loading...</div>}>
-            {MyCard && <MyCard tabIndex={props.tabIndex} id={props.jobid} cardContent={metadata} />}
-            </Suspense> */}
             <MyCard tabIndex={props.tabIndex} id={props.jobid} cardContent={metadata} />
-            {/* {metadataRef.current && <MetaDataCard metadata={metadataRef.current} />} */}
         </div>
     )
 }

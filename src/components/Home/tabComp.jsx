@@ -1,7 +1,7 @@
 import React from "react";
 import { Tab, Tabs } from "@mui/material";
 import { InputForm } from "../earthaccess/inputForm";
-import { Status } from "../earthaccess/status";
+import { ShowStatus } from "../earthaccess/status";
 import { GetFilePath } from "../earthaccess/filePath";
 import { ShowMetaData } from "../earthaccess/metadata";
 import { useEffect, useState } from "react";
@@ -44,13 +44,11 @@ export function TabComponent(){
             jobMap.set(uid, [status]);
           }
 
-           // Convert the Map to an array of objects
+        // Convert the Map to an array of objects
         const jobArray = Array.from(jobMap.entries()).map(([uid, statuses]) => ({ uid, statuses }));
-
-          setJobArrayState(jobArray);
-          //console.log("Message from server ", status)
-          setJobid(uid);
-          setJobStatus((prev) => [...prev, status]);
+        setJobArrayState(jobArray);
+        setJobid(uid);
+        setJobStatus((prev) => [...prev, status]);
         })
     
         return () => socket.close()
@@ -60,7 +58,7 @@ export function TabComponent(){
         setJobArrayState([]);
         jobMap.clear();
     }
-      console.log("job status: ", jobStatus)
+    
     return (
         <React.Fragment>
         <Tabs value={currentTabIndex} onChange={handleTabChange}>
@@ -70,7 +68,7 @@ export function TabComponent(){
             <Tab label='Metadata' />
         </Tabs>
         {currentTabIndex === 0 && <InputForm getJobid={(jobid) => setJobid(jobid)}/>}
-        {currentTabIndex === 1 && <Status tabIndex={currentTabIndex} jobObj={jobArrayState} clearJobs={clearJobsHandler}/>}
+        {currentTabIndex === 1 && <ShowStatus tabIndex={currentTabIndex} jobObj={jobArrayState} clearJobs={clearJobsHandler}/>}
         {currentTabIndex === 2 && <GetFilePath tabIndex={currentTabIndex} jobid={jobid}/>}
         {currentTabIndex === 3 && <ShowMetaData tabIndex={currentTabIndex} jobid={jobid}/>}
         </React.Fragment>

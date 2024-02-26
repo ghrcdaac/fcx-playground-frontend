@@ -3,7 +3,7 @@ import { MyCard } from "./UI/Card/Card";
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 
-export function Status(props) {
+export function ShowStatus(props) {
 
     const jobMap = props.jobObj
 
