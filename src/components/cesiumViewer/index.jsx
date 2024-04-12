@@ -14,6 +14,12 @@ import { initializePointPrimitiveViewer } from "./PointPrimitiveViewer";
 import { SubsettingToolExplorer } from "../toolsExplorer/subsettingTool";
 import { HistogramToolExplorer } from "../toolsExplorer/histogramTool";
 import { TabComponent } from "../Home/tabComp";
+import * as Constants from "../common/utils/Constants";
+
+// const jobType = Object.freeze({
+// 	1: Symbol("earthaccess"),
+// 	2: Symbol("pangeoforge"),
+// })
 
 export class FCXViewer extends Component {
     constructor(props) {
@@ -76,6 +82,10 @@ export class FCXViewer extends Component {
                 this.setState({toolExpolorer: "earthaccess", currentViewer: null});
                 this.flipViewMode("toolExplorer");
                 break;
+            case "pangeoforge":
+                this.setState({toolExpolorer: "pangeoforge", currentViewer: null});
+                this.flipViewMode("toolExplorer");
+                break;
             default:
                 this.flipViewMode("dataViewer");
                 initializeCZMLViewer(this.setCurrentViewer); 
@@ -116,7 +126,12 @@ export class FCXViewer extends Component {
                     }
                     {   !this.state.viewerExplorerToggle && this.state.toolExpolorer === "earthaccess" &&
                         (
-                            <TabComponent/>
+                            <TabComponent jobType={Constants.type_earthaccess}/>
+                        )
+                    }
+                    {   !this.state.viewerExplorerToggle && this.state.toolExpolorer === "pangeoforge" &&
+                        (
+                            <TabComponent jobType={Constants.type_pangeoforge}/>
                         )
                     }
                     </Grid>

@@ -1,38 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { MyCard } from "./UI/Card/Card";
+import { MyCard } from "../common/UI/Card/Card";
+import { refreshStatus } from "../common/utils/statusUtils";
+import { useSelector } from "react-redux";
+import * as Constants from "../common/utils/Constants";
 
+// display metadata for one of the result files(earthaccess)
 export function ShowMetaData(props) {
-    const [metadata, setMetadata] = useState(null);
+    const jobStatusUpdate = useSelector((state) => props.jobType === Constants.type_earthaccess? state.statusUpdate.eaStatusUpdate : state.statusUpdate.pfStatusUpdate);
+    const [savedJobs, setSavedJobs] = useState([]);
 
+    // listening for new jobs triggered
     useEffect(() => {
-        const fetchMetaData = async () => {
-            try {
-                const response = await fetch(`http://localhost:8000/get_metadata?uid=${props.jobid}`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json',
-                    
-                  },
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                console.log(data, typeof(data));
-                setMetadata(data);
-                
-            } catch (error) {
-                console.error('Error:', error.message);
-            }
-        };
-        fetchMetaData();
-    }, [props.jobid]);
+      refreshStatus(setSavedJobs, props.jobType);
+      }, [jobStatusUpdate]);
 
     return (
         <div>
-            <MyCard tabIndex={props.tabIndex} id={props.jobid} cardContent={metadata} />
+          {savedJobs.map((job) => (
+              <MyCard tabIndex={props.tabIndex} key={job.uid} timestamp={job.timestamp} id={job.uid} shortName={job.shortName}/>
+          ))}
         </div>
     )
 }
