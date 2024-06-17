@@ -28,6 +28,14 @@ export function InputForm(props) {
         dateRange1: "2022-11-19",
         dateRange2: "2022-11-30"
     };
+    const getDate = () => {
+        const today = new Date();
+        const month = today.getMonth() + 1;
+        const year = today.getFullYear();
+        const date = today.getDate();
+        return `${year}-${month<10?`0${month}`:`${month}`}-${date<10?`0${date}`:`${date}`}`;
+    }
+    const [currentDate, setCurrentDate] = useState(getDate());
 
     const formatDate = (date) => {
         return new Date(date).toLocaleDateString();
@@ -140,6 +148,9 @@ export function InputForm(props) {
                                     label="Start date"
                                     variant="outlined"
                                     size='small'
+                                    inputProps={{
+                                        max: currentDate
+                                    }}
                                     defaultValue={default_dates.dateRange1}
                                     {...register("dateRange1")}
                                     error={!!errors.dateRange1}
@@ -151,6 +162,9 @@ export function InputForm(props) {
                                     label="End date"
                                     variant="outlined"
                                     size='small'
+                                    inputProps={{
+                                        max: currentDate
+                                    }}
                                     defaultValue={default_dates.dateRange2}
                                     {...register("dateRange2")}
                                     error={!!errors.dateRange2}

@@ -19,7 +19,7 @@ import Checkbox from "@mui/material/Checkbox";
 */
 
 // lazy load the MetaDataCard component
-const MetaDataCard = lazy(() => import('../../../earthaccess/UI/Card/metaDataCard.jsx'))
+const MetaDataCard = lazy(() => import('../../../earthaccess/UI/Card/MetaDataCard.jsx'))
 
 const LazyLoading = () => {
     return <p><i>Loading...</i></p>; // fallback component for Suspense

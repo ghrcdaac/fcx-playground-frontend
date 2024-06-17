@@ -7,7 +7,7 @@ export function StatusCard(props) {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        if (props.status.at(-1) === "Job completed") {
+        if (props.status.at(-1) === "Job completed" || props.status.at(-1) === "No granules found") {
             setIsLoading(false);
         }
     }, [props.status]);
