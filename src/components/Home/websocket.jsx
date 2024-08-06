@@ -5,7 +5,7 @@ import { updateLocalStorage } from "../common/utils/localStorageUtils";
 
 export default function WebSocketHandler() {
     const dispatch = useDispatch();
-    const socketUrl = "ws://127.0.0.1:8000/ws";
+    const socketUrl = "https://d18jyfeuf17gzw.cloudfront.net/ws";
 
     useEffect(() => {
         const socket = new WebSocket(socketUrl);

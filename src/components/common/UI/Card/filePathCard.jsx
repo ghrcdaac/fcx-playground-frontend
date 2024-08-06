@@ -19,7 +19,7 @@ export function FilePathCard(props) {
 
     const fetchJobStatus = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/get_file_path?uid=${props.jobid}`, {
+        const response = await fetch(`https://d18jyfeuf17gzw.cloudfront.net/get_file_path?uid=${props.jobid}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -102,5 +102,3 @@ export function FilePathCard(props) {
     </div>
   )
 }
-
-

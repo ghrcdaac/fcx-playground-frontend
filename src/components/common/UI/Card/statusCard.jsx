@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 
+// displays status in the card created by card component
 export function StatusCard(props) {
     
     const [isLoading, setIsLoading] = useState(true);

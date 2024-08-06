@@ -17,7 +17,7 @@ export default function MetaDataCard(props) {
     const fetchMetaData = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:8000/get_metadata?uid=${props.jobid}`, {
+        const response = await fetch(`https://d18jyfeuf17gzw.cloudfront.net/get_metadata?uid=${props.jobid}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -41,9 +41,12 @@ export default function MetaDataCard(props) {
 
   return (
     <div>
-      {isLoading && <p><i>Loading...</i></p>}
-      {error && <p>{error.message}</p>}
-      {metadata && typeof (metadata) === 'string' ? (
+      {
+      isLoading ? (
+        <p><i>Loading...</i></p>  // Show only if isLoading is true
+      ) : error ? (
+        <p>{error.message}</p>  // Show error message if there's an error and not loading
+      ) : metadata && typeof (metadata) === 'string' ? (
         <p>{metadata}</p>
       ) :
         metadata && Object.entries(metadata).map(([key, value]) => (

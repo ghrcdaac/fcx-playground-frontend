@@ -1,6 +1,6 @@
 export function handleFileUpload(files, setBoundaryCoordinates){
-    console.log('upload file')
-    var reader = new FileReader();
+
+    let reader = new FileReader();
       reader.onload = function(e) {
           const result = JSON.parse(reader.result);
           const { features } = result;

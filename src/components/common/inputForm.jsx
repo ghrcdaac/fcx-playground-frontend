@@ -47,7 +47,7 @@ export function InputForm(props) {
             .typeError("Please enter a valid start date")
             .required(),
         dateRange2: Yup.date().typeError("Please enter a valid end date")
-            .min(Yup.ref('dateRange1') || new Date(), ({ min }) => `Date needs to be after ${formatDate(min)}!!`)
+            .min(Yup.ref('dateRange1') || new Date(), ({ min }) => `Date needs to be after ${formatDate(min)}!`)
             .required("Please enter a valid end date"),
         Xmin: Yup.number().required('Xmin is required'),
         Ymin: Yup.number().required('Ymin is required'),
@@ -66,7 +66,7 @@ export function InputForm(props) {
     const onSubmit = (formData) => {
         setIsSubmit(false);
         console.log("Submitted: ", isSubmit);
-        const url = new URL('http://localhost:8000/start_download');
+        const url = new URL('https://d18jyfeuf17gzw.cloudfront.net/start_download');
         url.searchParams.append('short_name', formData.shortName);
         url.searchParams.append('date_range', formatDate(formData.dateRange1));
         url.searchParams.append('date_range', formatDate(formData.dateRange2));
