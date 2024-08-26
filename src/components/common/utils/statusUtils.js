@@ -4,13 +4,16 @@ export function refreshStatus(setSavedJobs, jobType) {
 
   // adding latest status to local storage
   keys.forEach(key => {
+    if( key.length === 8) {
+
+
     const job = JSON.parse(localStorage.getItem(key));
     key.length === 8 && job.jobType === jobType && jobs.push({
       uid: key,
       timestamp: job.timestamp,
       shortName: job.shortName,
       statuses: job.status
-    });
+    }); }
   });
 
   // to show most recent job in status tab
