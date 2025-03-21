@@ -51,8 +51,8 @@ export function ClippedDrawer(props) {
                    mt={2}
                  >
                  {
-                   props.visualizationTypes.map((type) => (
-                     <FormControlLabel value={type} control={<Radio />} label={type} />
+                   props.visualizationTypes.map((type, index) => (
+                     <FormControlLabel key={index} value={type} control={<Radio />} label={type} />
                    ))
                  }
                </RadioGroup>
